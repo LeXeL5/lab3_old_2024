@@ -81,7 +81,7 @@ struct List {
     void removeAt(int index) {
         if (!isEmpty()) {
             if (index >= 0) {
-                while (index > size) {
+                while (index >= size) {
                     index -= size;
                 }
                 Node* prev = tail;
@@ -150,6 +150,12 @@ struct List {
             int iteration = size;
             while (iteration) {
                 if (current->value < 0) {
+                    if (current == tail) {
+                        tail = prev;
+                    }
+                    if (current == head) {
+                        head = current->next;
+                    }
                     prev->next = current->next;
                     delete current;
                     size--;
@@ -265,7 +271,7 @@ void main(int argc, char* argv[]) {
             default: {
                 cout << "Unknown command, try again" << endl;
                 break;
-                }
+            }
             }
             system("pause");
         }
